@@ -1,8 +1,45 @@
 <html>
-  <head>
+
+<head>
     <link rel="stylesheet" href="/static/css/styles.css" type="text/css">
-  </head>
-  <body>
-    Start with Courses
-  </body>
+</head>
+
+<body>
+    <h2>Add a new course</h2>
+    <br>
+    <form action="/courses_add" method="POST">
+        Name:
+        <input type="text" name="name"> Description:
+        <input type="text" name="description">
+        <input type="submit" value="Add">
+    </form>
+    <table>
+        <tr>
+            <th><b>Course</b></th>
+            <th><b>Description</b></th>
+            <th><b>Created at</b></th>
+            <th></th>
+        </tr>
+        {%for extract in extracts%}
+        <tr>
+            <td>{{extract['name']}}</td>
+            <td>{{extract['description']}}</td>
+            <td>{{extract['created_at']}}</td>
+            <td>
+                <form action="/remove_form/{{extract['id']}}" method="GET">
+                    <button>
+                        Remove
+                        
+
+                    </button>
+
+                </form>
+
+            </td>
+        </tr>
+        {%endfor%}
+    </table>
+    
+</body>
+
 </html>

@@ -12,6 +12,43 @@ from system.core.model import Model
 class Course(Model):
     def __init__(self):
         super(Course, self).__init__()
+
+    def create(self,form):
+        name=form['name']
+        description=form['description']
+        query = "INSERT INTO courses (name, description, created_at) VALUES (:name, :description, NOW())"
+        data={  'name': name, 
+                'description':description,
+            }
+
+        self.db.query_db(query, data)
+    
+    def extract(self):
+        return self.db.query_db("SELECT * FROM courses") 
+
+    def extract_one_record(self, id):
+        print id
+        query= "SELECT * FROM courses WHERE id=:id"
+        data ={'id':id}
+        return self.db.query_db(query, data)
+
+    def delete_record(self, id):
+        print id
+        query = "DELETE FROM courses WHERE id = :id"
+        data = {'id': id}
+        print data
+        return self.db.query_db(query, data)
+
+
+
+
+
+
+
+
+
+
+ 
     """
     Below is an example of a model method that queries the database for all users in a fictitious application
     
